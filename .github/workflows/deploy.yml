@@ -1,0 +1,32 @@
+on:
+  push:
+    branches:
+      - main
+name: 🚀 Deploy api on push
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+
+      - name: 🔨 Install Packages
+        run: |
+          npm install
+          npm run build
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        with:
+          server: ${{ secrets.SERVER }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PWD }}
+          server-dir: ${{ secrets.DIR }}
+          local-dir: ./dist/
