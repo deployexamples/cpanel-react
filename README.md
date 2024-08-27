@@ -75,7 +75,3 @@ jobs:
           server-dir: ${{ secrets.DIR }}
           local-dir: ./dist/
 ```
-
-## Conclusion
-
-You have successfully set up Apache on your server and configured it to serve a website based on a domain name. You can now deploy your website files to the server and access them using your domain name.
